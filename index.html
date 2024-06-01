@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrusel de Revisión</title>
+    <link rel="stylesheet" href="lienzo.css">
+</head>
+<body>
+    <!-- Canvas donde se dibujará el gráfico -->
+    <canvas id="lienzo" width="500" height="300" style="border:1px solid blue">
+        Tu navegador no soporta CANVAS. Deberías actualizar tu navegador
+    </canvas>
+
+    <!-- Pie de página -->
+    <footer>
+        Derechos reservados &copy; 2013-2024
+    </footer>
+
+    <!-- Script para dibujar en el canvas -->
+    <script type="text/javascript">
+        // Obtener el elemento canvas y su contexto 2D
+        var lienzo = document.getElementById("lienzo");
+        var dibujo = lienzo.getContext("2d");
+
+        // Dibujar fondo celeste
+        dibujo.fillStyle = "#68D2E8";
+        dibujo.fillRect(0, 0, 500, 300);
+
+        // Dibujar un rectángulo amarillo
+        dibujo.fillStyle = "#F8FF5A";
+        dibujo.fillRect(60, 80, 250, 140); // Coordenadas (x, y) y dimensiones (ancho, alto)
+        
+        // Dibujar un rectángulo gris más pequeño y dentro del amarillo
+        dibujo.fillStyle = "#686D76";
+        dibujo.fillRect(85, 105, 220, 90); // Coordenadas (x, y) y dimensiones (ancho, alto)
+
+        // Dibujar un rectángulo rojo en lugar de la línea vertical
+        dibujo.fillStyle = "#FF0000";
+        dibujo.fillRect(30, 80, 20, 140); // Coordenadas (x, y) y dimensiones (ancho, alto)
+
+        // Dibujar una línea roja horizontal sobre el rectángulo amarillo
+        dibujo.strokeStyle = "#FF0000";
+        dibujo.lineWidth = 5; // Grosor de la línea
+        dibujo.beginPath();
+        dibujo.moveTo(60, 80); // Punto inicial de la línea
+        dibujo.lineTo(310, 80); // Punto final de la línea
+        dibujo.stroke();
+
+        // Dibujar el piso gris en la parte inferior
+        dibujo.fillStyle = "#686D76";
+        dibujo.fillRect(0, 250, 500, 50); // Coordenadas (x, y) y dimensiones (ancho, alto)
+
+        // Crear y aplicar un gradiente lineal en la parte inferior
+        var gr = dibujo.createLinearGradient(0, 200, 0, 280);
+        gr.addColorStop(0, "#6FDCE3");
+        gr.addColorStop(1, "#a3cbba");
+        dibujo.fillStyle = gr;
+        dibujo.fillRect(0, 200, 500, 50); // Esto cubre parte del piso gris para dar un efecto de gradiente
+
+        // Cargar la imagen "oxxo.png" para la línea horizontal
+        var imgOXXOHorizontal = new Image();
+        imgOXXOHorizontal.src = "oxxo.png"; // Ruta de la imagen
+        imgOXXOHorizontal.onload = function() {
+            dibujo.drawImage(imgOXXOHorizontal, 155 - imgOXXOHorizontal.width / 2, 50); // Centrar la imagen horizontalmente
+        };
+
+        // Cargar la imagen para la línea vertical
+        var imgOXXOVertical = new Image();
+        imgOXXOVertical.src = "oxxo2.png"; // Ruta de la imagen
+        imgOXXOVertical.onload = function() {
+            dibujo.drawImage(imgOXXOVertical, 3, 50); // Colocar la imagen en la punta de la línea vertical roja
+        };
+
+    </script>
+</body>
+</html>
